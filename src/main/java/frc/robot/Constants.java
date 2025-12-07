@@ -13,6 +13,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import edu.wpi.first.wpilibj.RobotBase;
 
 /**
@@ -33,5 +34,26 @@ public final class Constants {
 
     /** Replaying from a log file. */
     REPLAY
+  }
+
+  public static final class Shooter {
+    public static final int ShooterMotorID = 1;
+
+    // Motor configs
+    public static final TalonFXConfiguration ShooterConfiguration =
+        new TalonFXConfiguration() {
+          {
+            // Example configs — customize yours
+            CurrentLimits.StatorCurrentLimit = 60;
+            CurrentLimits.StatorCurrentLimitEnable = true;
+
+            MotorOutput.NeutralMode = com.ctre.phoenix6.signals.NeutralModeValue.Coast;
+
+            Feedback.SensorToMechanismRatio = 1.0;
+            Slot0.kP = 0.2;
+            Slot0.kI = 0.0;
+            Slot0.kD = 0.0;
+          }
+        };
   }
 }
