@@ -69,7 +69,7 @@ This allows testing paths, inputs, and subsystems before the robot is even built
 
 ## 🧩 Getting Started
   1. Clone the Repo
-  ```git clone <your-repo-url>```
+-     git clone <your-repo-url>
   
   2. Open in VS Code (WPILib Extension)
   
@@ -86,7 +86,7 @@ This allows testing paths, inputs, and subsystems before the robot is even built
       - gyro configuration
     
   4. Run Simulation
-  ```./gradlew simulateJava```
+-     ./gradlew simulateJava
 
 Open AdvantageScope to visualize state, odometry, and logs.
 
