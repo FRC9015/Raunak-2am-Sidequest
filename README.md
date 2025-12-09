@@ -85,7 +85,7 @@ This allows testing paths, inputs, and subsystems before the robot is even built
      
       - gyro configuration
     
-  5. Run Simulation
+  4. Run Simulation
   ./gradlew simulateJava
 
 Open AdvantageScope to visualize state, odometry, and logs.
