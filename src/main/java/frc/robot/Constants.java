@@ -13,6 +13,12 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
+import com.ctre.phoenix6.signals.GravityTypeValue;
+
 import edu.wpi.first.wpilibj.RobotBase;
 
 /**
@@ -33,5 +39,28 @@ public final class Constants {
 
     /** Replaying from a log file. */
     REPLAY
+  }
+
+  public static class ElevatorConstants {
+    public static final double ELEVATOR_MAGNET_OFFSET = -0.13;
+    public static final MotionMagicConfigs MOTION_MAGIC_CONFIGS =
+        new MotionMagicConfigs().withMotionMagicAcceleration(150).withMotionMagicCruiseVelocity(50);
+    public static final Slot0Configs SLOT0_CONFIGS =
+        new Slot0Configs()
+            .withGravityType(GravityTypeValue.Elevator_Static)
+            .withKP(0)
+            .withKI(0)
+            .withKD(0.0)
+            .withKG(0.0)
+            .withKA(0)
+            .withKS(0)
+            .withKV(0);
+    public static final FeedbackConfigs FEEDBACK_CONFIGS =
+        new FeedbackConfigs()
+            .withFeedbackRemoteSensorID(0)
+            .withFeedbackSensorSource(FeedbackSensorSourceValue.RemoteCANcoder);
+
+    public static final double maxHeight = 8.25;
+    public static final double minHeight = -0.04;
   }
 }
