@@ -1,29 +1,25 @@
 package frc.robot.subsystems.drive.elevator;
 
-import org.littletonrobotics.junction.Logger;
-
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.drive.elevator.ElevatorIO.ElevatorIOInputs;
 import frc.robot.subsystems.drive.elevator.ElevatorIO.ElevatorIOInputs.ElevatorState;
 import java.util.function.Supplier;
 import org.littletonrobotics.junction.Logger;
 
-
 public class Elevator {
 
   private final ElevatorIO io;
   private final ElevatorIOInputsAutoLogged inputs = new ElevatorIOInputsAutoLogged();
-  private  Alert elevatorDisconnectedAlert;
-  private  Alert encoderDisconnectedAlert;
+  private Alert elevatorDisconnectedAlert;
+  private Alert encoderDisconnectedAlert;
 
-  private  PIDController pidController;
-  private  ElevatorFeedforward elevatorFeedforward;
+  private PIDController pidController;
+  private ElevatorFeedforward elevatorFeedforward;
 
   private double kP = 5;
   private double kI = 0.0;
@@ -45,27 +41,19 @@ public class Elevator {
     this.pidController.setTolerance(acceptableTolerance);
   }
 
-  @Override
-  public void periodic() {
-      io.updateInputs(inputs);
-      Logger.processInputs("Elevator", inputs);
-      encoderDisconnectedAlert.set(!inputs.elevatorEncoderConnected);
-
-  }
-
   public void setElevatorPosition(ElevatorState state) {
     double targetPosition = state.getEncoderPosition();
-    pidController.setSetpoint(targetPosition);  
+    pidController.setSetpoint(targetPosition);
 
-    double output = pidController.calculate(inputs.elevatorPosition)+ elevatorFeedforward.calculate(inputs.elevatorPosition);
+    double output =
+        pidController.calculate(inputs.elevatorPosition)
+            + elevatorFeedforward.calculate(inputs.elevatorPosition);
 
     inputs.setpoint = targetPosition;
 
     io.setElevatorPosition(state.getEncoderPosition());
     io.updateInputs(inputs);
     lastPosition = inputs.elevatorPosition;
-
-    
   }
 
   public Command executePreset(ElevatorIOInputs.ElevatorState state) {
@@ -126,6 +114,4 @@ public class Elevator {
   public boolean getToggle() {
     return inputs.toggle;
   }
-
 }
-
