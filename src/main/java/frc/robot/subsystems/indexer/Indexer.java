@@ -1,16 +1,15 @@
-package frc.robot.subsystems.climb;
+package frc.robot.subsystems.indexer;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.climb.ClimbIO.ClimbIOInputs;
+import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.subsystems.indexer.IndexerIO.IndexerIOInputs;
 import org.littletonrobotics.junction.Logger;
 
-public class Climb extends SubsystemBase {
-  private final ClimbIO io;
-  private final ClimbIOInputs inputs = new ClimbIOInputs();
+public class Indexer {
+  private final IndexerIO io;
+  private final IndexerIOInputs inputs = new IndexerIOInputs();
 
-  // replace with tuned values, if this is still 0 ts won't work
   private static final double kP = 0.0;
   private static final double kI = 0.0;
   private static final double kD = 0.0;
@@ -18,12 +17,11 @@ public class Climb extends SubsystemBase {
   private final PIDController positionController = new PIDController(kP, kI, kD);
   private double positionSetpoint = 0.0;
 
-  public Climb(ClimbIO io) {
+  public Indexer(IndexerIO io) {
     this.io = io;
   }
 
-  @Override
-  public void periodic() {
+public void periodic() {
     io.updateInputs(inputs);
     Logger.processInputs("Climb/Motor", inputs);
 
@@ -37,7 +35,7 @@ public class Climb extends SubsystemBase {
     }
   }
 
-  /** Runs the climber motor open loop in [-1, 1]. */
+  /** Runs the indexer motor open loop in [-1, 1]. */
   public void runOpenLoop(double output) {
     io.setOpenLoop(output);
   }
@@ -48,7 +46,7 @@ public class Climb extends SubsystemBase {
     positionController.setSetpoint(rotations);
   }
 
-  /** Stop the climber immediately. */
+  /** Stop the indexer immediately. */
   public void stop() {
     positionSetpoint = 0.0;
     positionController.reset();
@@ -57,6 +55,6 @@ public class Climb extends SubsystemBase {
 
   /** Returns a simple command that moves to the given rotation setpoint. */
   public Command moveToPositionCommand(double rotations) {
-    return runOnce(() -> moveToPosition(rotations));
+    return Commands.runOnce(() -> moveToPosition(rotations));
   }
 }

@@ -70,21 +70,21 @@ This allows testing paths, inputs, and subsystems before the robot is even built
 ## 🧩 Getting Started
   1. Clone the Repo
 -     git clone <your-repo-url>
-  
+
   2. Open in VS Code (WPILib Extension)
-  
+
   The project already contains all vendor dependencies including _Phoenix 6 and AdvantageKit._
-  
+
   3. Set Your Robot’s Constants
-           
+
       - module offsets
-     
+
       - swerve geometry
-     
+
       - CAN IDs (Kraken drive + steer)
-     
+
       - gyro configuration
-    
+
   4. Run Simulation
 -     ./gradlew simulateJava
 

@@ -1,4 +1,4 @@
-package frc.robot.subsystems.climb;
+package frc.robot.subsystems.indexer;
 
 import static frc.robot.util.PhoenixUtil.tryUntilOk;
 
@@ -12,7 +12,7 @@ import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Voltage;
 
 /** TalonFX-based Climb IO implementation (templated). Configure as needed for your robot. */
-public class ClimbIOTalonFX implements ClimbIO {
+public class IndexerIOTalonFX implements IndexerIO {
   private final TalonFX motor;
 
   // Control request
@@ -24,7 +24,7 @@ public class ClimbIOTalonFX implements ClimbIO {
   private final StatusSignal<Voltage> appliedVolts;
   private final StatusSignal<Current> current;
 
-  public ClimbIOTalonFX(int motorId, String canBusName) {
+  public IndexerIOTalonFX(int motorId, String canBusName) {
     motor = new TalonFX(motorId, canBusName);
 
     // Minimal configuration placeholder: users can expand this with their specific configs
@@ -42,7 +42,7 @@ public class ClimbIOTalonFX implements ClimbIO {
   }
 
   @Override
-  public void updateInputs(ClimbIOInputs inputs) {
+  public void updateInputs(IndexerIOInputs inputs) {
     var status = BaseStatusSignal.refreshAll(position, velocity, appliedVolts, current);
     inputs.motorConnected = status.isOK();
     // Phoenix position/velocity units are rotations (i think)
