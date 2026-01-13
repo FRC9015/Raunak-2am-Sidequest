@@ -8,7 +8,7 @@ import org.littletonrobotics.junction.Logger;
 
 public class Indexer {
   private final IndexerIO io;
-  private final IndexerIOInputs inputs = new IndexerIOInputs();
+  private final IndexerIOInputs inputs = new IndexerIOInputsAutoLogged();
 
   private static final double kP = 0.0;
   private static final double kI = 0.0;
@@ -23,7 +23,7 @@ public class Indexer {
 
 public void periodic() {
     io.updateInputs(inputs);
-    Logger.processInputs("Climb/Motor", inputs);
+    Logger.processInputs("Indexer/Motor", inputs);
 
     // Closed-loop position control (simple PIDs via WPILib controller)
     double output = positionController.calculate(inputs.positionRotations, positionSetpoint);
